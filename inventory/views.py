@@ -14,4 +14,7 @@ def index(request):
 
 # Inventory page lists computers in a given inventory.
 def inventory(request, inventory_id):
-    return HttpResponse("Inventory")
+    name = Inventory.objects.get(pk=inventory_id).name
+    computers = Computer.objects.filter(inventory=inventory_id)
+    context = { 'name': name, 'computers': computers }
+    return render(request, 'inventory/inventory.html', context)

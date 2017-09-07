@@ -1,0 +1,22 @@
+{% if name %}
+    <h2>{{name}}</h2>
+{% endif %}
+{% if computers %}
+    <table>
+        <tr>
+            <th>Serial #</th>
+            <th>Manufacturer</th>
+            <th>Comments</th>
+        </tr>
+    {% for computer in computers %}
+        <tr>
+            <td>{{computer.serial}}</td>
+            <td>{{computer.manufacturer}}</td>
+            <td>{{computer.comments}}</td>
+        </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No computers yet.</p>
+{% endif %}
+
