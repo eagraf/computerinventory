@@ -1,0 +1,9 @@
+<h1>New Inventory</h1>
+
+<form action="{% url 'inventory:addinventory' %}" method="post">
+{% csrf_token %}
+    <label for="invName">Name</label>
+    <input type="text" name="name" id="invName" placeholder="New Inventory" />
+    <input type="submit"/>
+</form>
+
