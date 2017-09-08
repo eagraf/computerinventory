@@ -1,0 +1,16 @@
+<h1>New Computer</h1>
+{% if inventory %}
+    <h2>{{ inventoryi.name }} </h2>
+{% endif %}
+
+<form action="{% url 'inventory:addcomputer' inventory.id %}" method="post">
+{% csrf_token %}
+    <label for="serial">Serial</label>
+    <input type="text" name="serial" id="serial" placeholder="Serial #" />
+    <label for="manufacturer">manufacturer</label>
+    <input type="text" name="manufacturer" id="manufacturer" placeholder="Manufacturer" />
+    <label for="Comments">Comments</label>
+    <input type="text" name="comments" id="comments" placeholder="Comment" />
+    <input type="submit"/>
+</form>
+

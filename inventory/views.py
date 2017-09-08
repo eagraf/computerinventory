@@ -28,9 +28,30 @@ def inventory(request, inventory_id):
 
 # Returns form for adding a new inventory.
 def add_inventory(request):
+    # Render form if GET is used.
     if request.method == 'GET':
         return render(request, 'inventory/addinventory.html', {})
+    # Add a new inventory if POST is used.
     elif request.method == 'POST':
-        i = Inventory(name=request.POST['name'])
-        i.save();
+        inventory = Inventory(name=request.POST['name'])
+        inventory.save();
         return HttpResponseRedirect(reverse('inventory:index'))
+
+# Form for adding a new computer to a inventory.
+def add_computer(request, inventory_id):
+    # First get the inventory (necessary for both get and post).
+    try:
+        inventory = Inventory.objects.get(pk=inventory_id)
+    except Inventory.DoesNotExist:
+        raise Http404("Inventory does not exist")
+
+    # Render the form if GET is used
+    if request.method == 'GET':
+        context = { 'inventory': inventory }
+        return render(request, 'inventory/addcomputer.html', context)
+    # Add new computer to an inventory if POST is used
+    elif request.method == 'POST':
+        # Create the computer in the correct inventory.
+        computer = Computer(serial=request.POST['serial'], manufacturer=request.POST['manufacturer'], comments=request.POST['comments'], inventory=inventory)
+        computer.save()
+        return HttpResponseRedirect(reverse('inventory:inventory', args=(inventory_id,)))
