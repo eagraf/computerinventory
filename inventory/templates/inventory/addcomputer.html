@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
 <h1>New Computer</h1>
 {% if inventory %}
     <h2>{{ inventoryi.name }} </h2>
@@ -13,4 +16,5 @@
     <input type="text" name="comments" id="comments" placeholder="Comment" />
     <input type="submit"/>
 </form>
+{% endblock %}
 

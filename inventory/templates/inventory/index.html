@@ -1,12 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
 {% if inventories %}
     <ul>
     {% for inventory in inventories %}
-    <li><a href="{% url 'inventory:inventory' inventory.id %}">
-            {{inventory.name}}
+        <li><a href="{% url 'inventory:inventory' inventory.id %}">
+                {{inventory.name}}
         </a></li>
     {% endfor %}
     </ul>
 {% else %}
     <p>No inventories yet.</p>
 {% endif %}
+{% endblock %}
 

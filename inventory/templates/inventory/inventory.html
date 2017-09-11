@@ -1,22 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
 {% if name %}
     <h2>{{name}}</h2>
 {% endif %}
 {% if computers %}
-    <table>
-        <tr>
-            <th>Serial #</th>
-            <th>Manufacturer</th>
-            <th>Comments</th>
-        </tr>
-    {% for computer in computers %}
-        <tr>
-            <td>{{computer.serial}}</td>
-            <td>{{computer.manufacturer}}</td>
-            <td>{{computer.comments}}</td>
-        </tr>
-    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Serial #</th>
+                <th>Manufacturer</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for computer in computers %}
+            <tr>
+                <td>{{computer.serial}}</td>
+                <td>{{computer.manufacturer}}</td>
+                <td>{{computer.comments}}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
     </table>
 {% else %}
     <p>No computers yet.</p>
 {% endif %}
-
+{% endblock %}

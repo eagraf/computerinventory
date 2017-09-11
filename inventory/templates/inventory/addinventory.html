@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
 <h1>New Inventory</h1>
 
 <form action="{% url 'inventory:addinventory' %}" method="post">
@@ -6,4 +9,5 @@
     <input type="text" name="name" id="invName" placeholder="New Inventory" />
     <input type="submit"/>
 </form>
+{% endblock %}
 
