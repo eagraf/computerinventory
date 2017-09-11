@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if name %}
-    <h2>{{name}}</h2>
+{% if inventory %}
+<div id="inventory-header">
+    <h2 id="inventory-title">{{inventory.name}}</h2>
+    <a id="button-add-computer" class="btn btn-primary" role="button" href="{% url 'inventory:addcomputer' inventory.id  %}">Add Computer</a
+</div>
 {% endif %}
 {% if computers %}
     <table class="table">
@@ -11,6 +14,7 @@
                 <th>Serial #</th>
                 <th>Manufacturer</th>
                 <th>Comments</th>
+                <th>Edit</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +23,7 @@
                 <td>{{computer.serial}}</td>
                 <td>{{computer.manufacturer}}</td>
                 <td>{{computer.comments}}</td>
+                <td><a href="{% url 'inventory:editcomputer' inventory.id computer.id %}" >Edit</a></td>
             </tr>
         {% endfor %}
         </tbody>

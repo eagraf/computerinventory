@@ -6,6 +6,7 @@ from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.urls import reverse
 
 from .models import Inventory, Computer
+from .edit_computer_form import EditComputerForm
 
 # Index page just contains a list of inventories.
 def index(request):
@@ -17,13 +18,13 @@ def index(request):
 def inventory(request, inventory_id):
     # First get the associated inventory.
     try:
-        name = Inventory.objects.get(pk=inventory_id).name
+        inventory = Inventory.objects.get(pk=inventory_id)
     except Inventory.DoesNotExist:
         raise Http404("Inventory does not exist")
 
     # Get and render the list of computers.
     computers = Computer.objects.filter(inventory=inventory_id)
-    context = { 'name': name, 'computers': computers }
+    context = { 'inventory': inventory, 'computers': computers }
     return render(request, 'inventory/inventory.html', context)
 
 # Returns form for adding a new inventory.
@@ -55,3 +56,22 @@ def add_computer(request, inventory_id):
         computer = Computer(serial=request.POST['serial'], manufacturer=request.POST['manufacturer'], comments=request.POST['comments'], inventory=inventory)
         computer.save()
         return HttpResponseRedirect(reverse('inventory:inventory', args=(inventory_id,)))
+
+def edit_computer(request, inventory_id, computer_id):
+    if request.method == 'GET':
+        form = EditComputerForm();
+        context = { 'edit_form': form }
+        return render(request, 'inventory/editcomputer.html', context)
+    if request.method == 'POST':
+        computer = Computer.objects.get(pk=computer_id)
+        if request.POST['serial']:
+            computer.serial = request.POST['serial']
+        if request.POST['manufacturer']:
+            computer.manufacturer = request.POST['manufacturer']
+        if request.POST['comments']:
+            computer.comments = request.POST['comments']
+
+        computer.save()
+        return HttpResponseRedirect(reverse('inventory:inventory', args=(inventory_id,)))
+
+

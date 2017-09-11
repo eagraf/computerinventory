@@ -1,3 +1,10 @@
- a {
-    color: green;
- }
+#inventory-header {
+    margin-top: 16px;
+}
+#inventory-title {
+    float: left;
+}
+
+#button-add-computer {
+    float: right;
+}
