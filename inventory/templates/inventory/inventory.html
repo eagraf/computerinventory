@@ -14,7 +14,7 @@
                 <th>Serial #</th>
                 <th>Manufacturer</th>
                 <th>Comments</th>
-                <th>Edit</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -23,7 +23,13 @@
                 <td>{{computer.serial}}</td>
                 <td>{{computer.manufacturer}}</td>
                 <td>{{computer.comments}}</td>
-                <td><a href="{% url 'inventory:editcomputer' inventory.id computer.id %}" >Edit</a></td>
+                <td>
+                    <p>
+                        <a href="{% url 'inventory:editcomputer' inventory.id computer.id %}" >Edit</a>
+                        &#8231
+                        <a href="{% url 'inventory:deletecomputer' inventory.id computer.id %}" >Delete</a>
+                    </p>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

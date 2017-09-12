@@ -57,11 +57,14 @@ def add_computer(request, inventory_id):
         computer.save()
         return HttpResponseRedirect(reverse('inventory:inventory', args=(inventory_id,)))
 
+# Form for editing a computers info.
 def edit_computer(request, inventory_id, computer_id):
+    # Render form if GET is used.
     if request.method == 'GET':
         form = EditComputerForm();
         context = { 'edit_form': form }
         return render(request, 'inventory/editcomputer.html', context)
+    # Update the fields, if any, and save the computer again.
     if request.method == 'POST':
         computer = Computer.objects.get(pk=computer_id)
         if request.POST['serial']:
@@ -73,5 +76,16 @@ def edit_computer(request, inventory_id, computer_id):
 
         computer.save()
         return HttpResponseRedirect(reverse('inventory:inventory', args=(inventory_id,)))
+
+# Endpoint for deleting a computer.
+def delete_computer(request, inventory_id, computer_id):
+    try:
+        computer = Computer.objects.get(pk=computer_id)
+    except Computer.DoesNotExist:
+        raise Http404("Computer does not exist")
+
+    computer.delete()
+
+    return HttpResponseRedirect(reverse('inventory:inventory', args=(inventory_id,)))
 
 
