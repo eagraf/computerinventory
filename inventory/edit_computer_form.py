@@ -27,6 +27,7 @@ class EditComputerForm(forms.Form):
     )
 
     comments = forms.CharField(
+        widget = forms.Textarea(),
         label = "Comments",
         max_length = 1024,
         required = False,

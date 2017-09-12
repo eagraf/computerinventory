@@ -1,3 +1,10 @@
+.navbar {
+    background-color: #009688;
+}
+.navbar-brand {
+    color: white !important;
+}
+
 #inventory-header {
     margin-top: 16px;
 }
@@ -7,4 +14,8 @@
 
 #button-add-computer {
     float: right;
+}
+
+#no-computer {
+    clear: both;
 }

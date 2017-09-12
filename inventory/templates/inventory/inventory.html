@@ -3,8 +3,8 @@
 {% block content %}
 {% if inventory %}
 <div id="inventory-header">
-    <h2 id="inventory-title">{{inventory.name}}</h2>
-    <a id="button-add-computer" class="btn btn-primary" role="button" href="{% url 'inventory:addcomputer' inventory.id  %}">Add Computer</a
+    <h4 id="inventory-title">{{inventory.name}}</h4>
+    <a id="button-add-computer" class="btn btn-primary btn-sm" role="button" href="{% url 'inventory:addcomputer' inventory.id  %}">Add Computer</a>
 </div>
 {% endif %}
 {% if computers %}
@@ -29,6 +29,9 @@
         </tbody>
     </table>
 {% else %}
-    <p>No computers yet.</p>
+    <div id="no-computer">
+        <hr></hr>
+        <p>No computers yet.</p>
+    </div>
 {% endif %}
 {% endblock %}
